@@ -6,6 +6,8 @@ This lightweight self-hosted app allows you to transform those messages into a f
 
 Shopping list items must be separated by commas and/or new lines. You can also add items, or paste in more text to add on to the same list.
 
+This app is unpolished, but your list survives on refreshes and tab closures.
+
 ### Example Inputs
 
 Comma separated
