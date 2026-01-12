@@ -17,7 +17,7 @@ services:
       - traefik.http.routers.${PROJECT_SUB_DOMAIN}.rule=Host(`${PROJECT_SUB_DOMAIN}.${LOCAL_DOMAIN_NAME}`)
       - homepage.group=Personal
       - homepage.name=Text2Shop
-      - homepage.icon=mdi-qrcode-edit
+      - homepage.icon=mdi-cart
       - homepage.href=https://${PROJECT_SUB_DOMAIN}.${LOCAL_DOMAIN_NAME}
       - homepage.description=Paste text to transform it into a list. Useful for shopping 
 networks:
