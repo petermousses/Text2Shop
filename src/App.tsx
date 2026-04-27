@@ -151,7 +151,7 @@ or
                 onClick={handleParse}
                 disabled={!inputText.trim()}
               >
-                Create Checklist
+                Add to Checklist
               </button>
               {items.length > 0 && (
                 <button
