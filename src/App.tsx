@@ -100,10 +100,12 @@ function App() {
   }
 
   const clearChecked = () => {
+    if (!window.confirm(`Remove ${checkedCount} checked item${checkedCount !== 1 ? 's' : ''}?`)) return
     setItems(prev => prev.filter(item => !item.checked))
   }
 
   const clearAll = () => {
+    if (!window.confirm(`Remove all ${totalCount} item${totalCount !== 1 ? 's' : ''}?`)) return
     setItems([])
     setShowInput(true)
   }
