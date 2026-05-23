@@ -99,15 +99,28 @@ function App() {
     setItems(prev => prev.filter(item => item.id !== id))
   }
 
+  const [confirmAction, setConfirmAction] = useState<'clearChecked' | 'clearAll' | null>(null)
+
   const clearChecked = () => {
-    if (!window.confirm(`Remove ${checkedCount} checked item${checkedCount !== 1 ? 's' : ''}?`)) return
-    setItems(prev => prev.filter(item => !item.checked))
+    setConfirmAction('clearChecked')
   }
 
   const clearAll = () => {
-    if (!window.confirm(`Remove all ${totalCount} item${totalCount !== 1 ? 's' : ''}?`)) return
-    setItems([])
-    setShowInput(true)
+    setConfirmAction('clearAll')
+  }
+
+  const handleConfirm = () => {
+    if (confirmAction === 'clearChecked') {
+      setItems(prev => prev.filter(item => !item.checked))
+    } else if (confirmAction === 'clearAll') {
+      setItems([])
+      setShowInput(true)
+    }
+    setConfirmAction(null)
+  }
+
+  const handleCancel = () => {
+    setConfirmAction(null)
   }
 
   const checkedCount = items.filter(i => i.checked).length
@@ -218,6 +231,23 @@ or
           </div>
         )}
       </main>
+
+      {confirmAction && (
+        <div className="modal-overlay" onClick={handleCancel}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            <p className="modal-message">
+              {confirmAction === 'clearChecked'
+                ? `Remove ${checkedCount} checked item${checkedCount !== 1 ? 's' : ''}?`
+                : `Remove all ${totalCount} item${totalCount !== 1 ? 's' : ''}?`
+              }
+            </p>
+            <div className="modal-actions">
+              <button className="btn btn-secondary" onClick={handleCancel}>Cancel</button>
+              <button className="btn btn-danger" onClick={handleConfirm}>Remove</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
